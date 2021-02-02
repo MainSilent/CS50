@@ -1,0 +1,125 @@
+body {
+    margin: 0;
+    background-color: white;
+    overflow: hidden;
+}
+
+code {
+    white-space: pre;
+}
+
+a {
+    color: black;
+}
+
+a:hover {
+    color: black;
+    text-decoration: none;
+}
+
+h1 {
+    margin-top: 0px;
+    padding-top: 20px;
+}
+
+textarea {
+    height: 90vh;
+    width: 80%;
+}
+
+.main {
+    padding: 10px;
+}
+
+.search {
+    width: 100%;
+    font-size: 15px;
+    line-height: 15px;
+}
+
+.sidebar {
+    background-color: #f0f0f0;
+    height: 100vh;
+    padding: 20px;
+}
+
+.sidebar h2 {
+    margin-top: 5px;
+}
+
+.sidebar input {
+    margin-bottom: 10px;
+}
+
+.sidebar a {
+    display: block;
+    margin-top: 10px;
+    padding: 10px;
+    cursor: pointer;
+    transition: .2s;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.sidebar a:hover {
+    background-color: white;
+}
+
+.entry-container {
+    width: 100%;
+    margin-top: 30px;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(auto-fit, 100px);
+}
+
+.entry-container li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    font-size: 20px;
+    width: 100px;
+    height: 100px;
+    border-radius: 5px;
+    list-style-type: none;
+    background-color: rgba(0, 0, 0, 0.1);
+    transition: .2s;
+    cursor: pointer;
+}
+
+.entry-container li:hover {
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+}
+
+.add {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.add textarea {
+    width: 800px;
+    height: 500px;
+}
+
+.add label {
+    margin-top: 20px;
+}
+
+.add input[type="submit"] {
+    margin-top: 20px;
+}
+
+.edit {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 20px;
+    position: absolute;
+    right: 60px;
+    top: 30px;
+    transition: .2s;
+}
+.edit:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}

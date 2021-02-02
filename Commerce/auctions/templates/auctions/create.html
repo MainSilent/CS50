@@ -1,0 +1,17 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<form method="post" style="display: flex; flex-direction: column; align-items: center">
+    {% csrf_token %}
+    <input type="text" id="title" name="title" placeholder="Title" required>
+    <textarea id="description" rows="10" cols="35" name="description" placeholder="Description" required></textarea>
+    <select id="category" name="category" required>
+        {% for c in categories %}
+            <option>{{ c }}</option>
+        {% endfor %}
+    </select>
+    <input type="text" id="image_url" name="image_url" placeholder="Image URL">
+    <input type="number" id="start_bid" name="start_bid" placeholder="Start Bid" required>
+    <button type="submit">Create</button>
+</form>
+{% endblock %}

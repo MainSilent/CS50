@@ -1,0 +1,78 @@
+body {
+    padding: 10px;
+}
+
+input, select, textarea, button[type="submit"] {
+    margin-top: 20px;
+}
+
+.listing {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.listing * {
+    margin-top: 20px;
+}
+
+.comments {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid black;
+    list-style: none;
+}
+
+.comments li {
+    padding: 20px;
+    border-radius: 5px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.listings-container {
+    display: grid;
+    grid-gap: 50px;
+    margin: 50px;
+    grid-auto-flow: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+}
+
+.listing-container {
+    position: relative;
+    padding: 10px;
+    width: 400px;
+    border-radius: 5px;
+    border: 1px solid black;
+    transition: 0.2s;
+    word-wrap: break-word;
+    cursor: pointer;
+}
+
+.listing-container:hover {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.listing-container img {
+    margin: 15px 0;
+}
+
+.categories {
+    grid-auto-flow: column;
+    grid-template-columns: none;
+}
+
+.category {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: min-content;
+    padding: 20px;
+}

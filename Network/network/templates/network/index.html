@@ -1,0 +1,94 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+    {% if not is_profile %}
+    <form action="/add_post" method="post" class="add_form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="hidden" id="post_id"/>
+        <input type="submit" />
+    </form>
+    {% else %}
+    <div class="profile">
+        <h1>{{ target_user }}</h1>
+        <p class="followers">Followers: {{ follower_count }}</p>
+        <p class="following">Following: {{ following_count }}</p>
+        {% if user.is_authenticated and user.username != target_user %}
+            <a class="follow" href="/follow?user={{ target_user }}">{% if is_follow %}Unfollow{% else %}Follow{% endif %}</a>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    <div class="posts">    
+        {% for post in page_obj.object_list %}
+        <div class="post" id="post-{{ post.id }}">
+            <p class="username" onclick="window.location='?user={{ post.user.username }}'">{{ post.user.username }}</p>
+            <hr/>
+            <p class="content">{{ post.content }}</p>
+            <hr/>
+            <div class="data">
+                <p class="created_at">{{ post.created_at }}</p>
+                <p class="likes" onclick="like({{ user.id }}, {{ post.id }})">{{ post.likes.all|length }} {% if user in post.likes.all %}❤️{% else %}🖤{% endif %}</p>
+            </div>
+            {% if post.user == user %}
+                <p class="edit" onclick="set_edit({{ post.id }})">Edit</p>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}{% if target_user %}&user={{ target_user }}{% endif %}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}{% if target_user %}&user={{ target_user }}{% endif %}">next</a>
+            {% endif %}
+        </span>
+    </div>
+
+    <script>
+    document.querySelector('.add_form').addEventListener('submit', e => {
+        const newContent = e.target.querySelector('#id_new_post')
+        const post_id = document.querySelector('#post_id')
+        if (post_id.value) {
+            e.preventDefault()
+            let formData = new FormData()
+            formData.append("new_post", newContent.value)
+            formData.append("post_id", post_id.value)
+            fetch(`/add_post`, { method: 'POST', body: formData })
+                .then(response => response.text())
+                .then((response) => {
+                    const post = document.querySelector(`#post-${post_id.value}`)
+                    post.querySelector(`.content`).innerText = response
+                    post.style.animation = 'edited .5s 4 alternate'
+                    setTimeout(() => {
+                        post.style.animation = ''
+                    }, 2000)
+                    post_id.value = newContent.value = ''
+                })
+        }
+    })
+
+    function set_edit(id) {
+        const post = document.querySelector(`#post-${id}`).querySelector('.content')
+        const addForm = document.querySelector('.add_form')
+        document.querySelector("#id_new_post").value = post.innerText
+        document.querySelector("#post_id").value = id
+    }
+
+    function like(user_id, post_id) {
+        fetch(`/like?post_id=${post_id}`)
+            .then(res => res.json())
+            .then(res => {
+                document.querySelector(`#post-${post_id} .likes`).innerText = `${res.count} ${!res.is_like ? '🖤' : '❤️'}`
+            })
+    }
+    </script>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <div class="listing">
+        {% if error %}
+            <p>{{ error }}</p>
+        {% endif %}
+
+        {% if l.image_url %}
+            <img src="{{ l.image_url }}"/>
+        {% endif %}
+        <p>Title: {{ l.title }}</p>
+        <p>Description: {{ l.description }}</p>
+        <p>Category: {{ l.category }}</p>
+        <p>Start Bid: {{ l.start_bid }}$ <br/><br/> Current Price: {% if l.bid.all %}{{ bid.amount }}{% else %}{{ l.start_bid }}{% endif %}$</p>
+        {% if l.is_active %}<p style="color: green">Listing is active</p>{% else %}<p style="color: red">Listing is closed</p>{% endif %}
+
+        {% if user.is_authenticated %}
+            {% if l not in user.watchlist.all %}
+                <a href="/watchlist/{{ l.id }}">Add to Watchlist</a>
+            {% else %}
+                <a href="/watchlist/{{ l.id }}">Remove from Watchlist</a>
+            {% endif %}
+
+            {% if l.owner == user %}
+                <a href="/close/{{ l.id }}">{% if l.is_active %}Close{% else %}Open{% endif %}</a>
+            {% endif %}
+            
+            {% if l.is_active %}
+            <form action="/set_bid/{{ l.id }}">
+                <input type="number" name="amount" placeholder="Amount"/>
+                <input type="submit"/>
+            </form>
+            {% elif bid %}
+            <p>{{ bid.owner.username }} is the winner!</p>
+            {% endif %}
+
+            <form action="/comment/{{ l.id }}" style="display: flex; flex-direction: column;">
+                <textarea name="content" cols="30" rows="10" placeholder="Comment"></textarea>
+                <br/>
+                <input type="submit"/>
+            </form>
+        {% endif %}
+
+        <ul class="comments">
+            {% for comment in comments %}
+            <li>
+                <h4>{{ comment.owner.username }}</h4>
+                <p>{{ comment.content }}</p>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

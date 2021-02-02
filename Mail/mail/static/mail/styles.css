@@ -1,0 +1,42 @@
+textarea {
+    min-height: 400px;
+}
+
+.email {
+    display: grid;
+    grid-auto-flow: column;
+    padding: 10px;
+    margin-top: 10px;
+    height: min-content;
+    border-radius: 5px;
+    border: 1px solid #000000aa;
+    cursor: pointer;
+}
+
+.email p:last-child {
+    justify-self: end;
+}
+
+.read {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.email-container {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.archive-btn {
+    padding: 10px;
+    color: white;
+    border-radius: 5px;
+    width: max-content;
+    background-color: rgba(29, 158, 158);
+    cursor: pointer;
+    margin-right: 0;
+}
+
+.reply-btn {
+    background-color: rgba(29, 158, 104);
+}

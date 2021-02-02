@@ -1,0 +1,11 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <div class="listings-container categories">
+        {% for c in categories %}    
+            <div class="listing-container category" onclick="location.href='/category/{{ c.name }}'">
+                <p>{{ c.name }}</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <div class="listings-container">
+        {% for l in listings %}    
+            <div class="listing-container" onclick="location.href='/listing/{{ l.id }}'">
+            {% if l.image_url %}
+                <img src="{{ l.image_url }}"/>
+            {% endif %}
+                <p>Title: {{ l.title }}</p>
+                <p>Description: {{ l.description }}</p>
+                <p>Category: {{ l.category }}</p>
+                <p>Current Price: {% if l.bid.all %}{{ l.bid.all.last.amount }}{% else %}{{ l.start_bid }}{% endif %}$</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
