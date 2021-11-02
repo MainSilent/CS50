@@ -1,0 +1,81 @@
+* {
+    font-weight: lighter;
+    font-family: arial;
+}
+
+html, body {
+    height: 99%;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: rgb(209, 22, 22);
+    font-size: 20px;
+    padding: 12px;
+    padding-left: 40px;
+    margin-top: 10px;
+}
+
+img {
+    padding: 20px;
+    width: 74px;
+    height: 24px;
+}
+
+.navbar {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+.search-container {
+    padding-top: 20px;
+    padding-left: 40px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.search-container td {
+    font-size: 13px;
+    padding: 7px 0;
+}
+
+.search-container p {
+    font-size: 16px;
+}
+
+.search-container form {
+    width: 100%;
+}
+
+.search-container table {
+    position: relative;
+}
+
+.search-container input {
+    padding: 1px 8px;
+    height: 25px;
+    width: 550px;
+    margin-left: 30px;
+    outline: none;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.search-container input[type="submit"] {
+    position: absolute;
+    background-color: #4d90fe;
+    font-size: 11px;
+    height: 30px;
+    width: 120px;
+    padding: 0 12px;
+    margin-top: 10px;
+    border-radius: 2px;
+    right: 0;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+}
+
+.search-container input:focus {
+    border-color: rgb(38, 139, 206);
+}
